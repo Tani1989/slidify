@@ -78,9 +78,8 @@ The link for the app is : <a href="https://tanika.shinyapps.io/disneyShinyapp/">
     <h2>Working of Shiny App:</h2>
   </hgroup>
   <article data-timings="">
-    <p>You can select the Dataset and the title of the movie to view the related data in the tabular form. </p>
-
-<p><img src="./assets/img/image1.png" height="1000" width="1000"/></p>
+    <p>You can select the Dataset and the title of the movie to view the related data in the tabular form. 
+<img src="./assets/img/image1.png" height="800" width="1000"/></p>
 
   </article>
   <!-- Presenter Notes -->
@@ -91,9 +90,12 @@ The link for the app is : <a href="https://tanika.shinyapps.io/disneyShinyapp/">
     <h2>WordCloud</h2>
   </hgroup>
   <article data-timings="">
-    <p>You can select the income i.e. Total Gross or Inflation Adjusted from the dropdown and view the wordcloud accordingly - the movie with the highest income appears to be the biggest.</p>
+    <p>You can select the 
+income i.e. Total Gross or Inflation Adjusted from the dropdown and view the wordcloud accordingly - the movie with the highest income appears to be the biggest.</p>
 
-<p><img src="./assets/img/image2.png" height="1000" width="1000"/></p>
+<h2>Genre</h2>
+
+<p>You can select the income i.e. Total Gross or Inflation Adjusted from the dropdown and view the bargraph accordingly.</p>
 
   </article>
   <!-- Presenter Notes -->
@@ -101,12 +103,48 @@ The link for the app is : <a href="https://tanika.shinyapps.io/disneyShinyapp/">
 
 <slide class="" id="slide-4" style="background:;">
   <hgroup>
-    <h2>Genre</h2>
+    <h2>ui.R</h2>
   </hgroup>
   <article data-timings="">
-    <p>You can select the income i.e. Total Gross or Inflation Adjusted from the dropdown and view the bargraph accordingly.</p>
+    <pre><code>   navbarPage(&quot;Disney&quot;,
 
-<p><img src="./assets/img/image3.png" height="1000" width="1000"/></p>
+
+               tabPanel(&quot;VIEW DATA&quot;,
+                        sidebarLayout(
+                          sidebarPanel(
+
+                            selectInput(&quot;dataset&quot;, &quot;Select a dataset:&quot;,
+                                        choices = c(&quot;Gross Income&quot;, &quot;Characters&quot;, &quot;Directors&quot;)),
+                            selectizeInput(&#39;columns&#39;,&#39;Select The Movie&#39;,&quot;&quot;)),
+
+                          mainPanel(
+
+                            tableOutput(&quot;view&quot;)
+
+                          )
+                        )
+
+               ),
+               tabPanel(&quot;WORDCLOUD&quot;,
+                        sidebarPanel(
+                          selectInput(&quot;income1&quot;,&quot;Select Income for wordcloud&quot;,choices = c(&quot;Total Gross Income&quot;,&quot;Inflated Gross Income&quot;))),
+                        mainPanel(
+                          plotOutput(&quot;cloud&quot;,width = &quot;100%&quot;)
+                        )
+
+               ),
+               tabPanel(&quot;GENRE&quot;,
+                        sidebarPanel(
+                          selectInput(&quot;income&quot;,&quot;Select Income for genre&quot;,choices = c(&quot;Total Gross Income&quot;,&quot;Inflated Gross Income&quot;))),
+
+                        mainPanel(
+                          plotOutput(&quot;genre&quot;)
+                        )
+
+               )
+</code></pre>
+
+<p>)</p>
 
   </article>
   <!-- Presenter Notes -->
@@ -129,18 +167,14 @@ The link for the app is : <a href="https://tanika.shinyapps.io/disneyShinyapp/">
       </a>
     </li>
     <li>
-      <a href="#" target="_self" re
-         
-         
-         
-         l='tooltip' 
+      <a href="#" target="_self" rel='tooltip' 
         data-slide=3 title='WordCloud'>
          3
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=4 title='Genre'>
+        data-slide=4 title='ui.R'>
          4
       </a>
     </li>
@@ -156,10 +190,6 @@ The link for the app is : <a href="https://tanika.shinyapps.io/disneyShinyapp/">
   <script src="libraries/widgets/bootstrap/js/bootstrap.min.js"></script>
 <script src="libraries/widgets/bootstrap/js/bootbox.min.js"></script>
 <script src="libraries/widgets/interactive/js/ace/js/ace.js"></script>
-<script
-  src="https://code.jquery.com/jquery-3.3.1.js"
-  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-  crossorigin="anonymous"></script>
 <script src="libraries/widgets/interactive/js/opencpu-0.5.js"></script>
 <script src="libraries/widgets/interactive/js/interactive.js"></script>
 
