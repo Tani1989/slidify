@@ -36,28 +36,59 @@ You can find the source code at : https://github.com/Tani1989/Developing-Data-Pr
 ## Working of Shiny App:
 
 You can select the Dataset and the title of the movie to view the related data in the tabular form. 
-
-
-
-<img src="./assets/img/image1.png" height="1000" width="1000"/>
+<img src="./assets/img/image1.png" height="800" width="1000"/>
 
 ---
 
 ## WordCloud 
+You can select the 
+income i.e. Total Gross or Inflation Adjusted from the dropdown and view the wordcloud accordingly - the movie with the highest income appears to be the biggest.
 
-You can select the income i.e. Total Gross or Inflation Adjusted from the dropdown and view the wordcloud accordingly - the movie with the highest income appears to be the biggest.
 
-
-<img src="./assets/img/image2.png" height="1000" width="1000"/>
+## Genre
+You can select the income i.e. Total Gross or Inflation Adjusted from the dropdown and view the bargraph accordingly.
 
 ---
 
-## Genre
+## ui.R
 
-You can select the income i.e. Total Gross or Inflation Adjusted from the dropdown and view the bargraph accordingly.
-
-<img src="./assets/img/image3.png" height="1000" width="1000"/>
-
-
-
+       navbarPage("Disney",
+                   
+                   
+                   tabPanel("VIEW DATA",
+                            sidebarLayout(
+                              sidebarPanel(
+                                
+                                selectInput("dataset", "Select a dataset:",
+                                            choices = c("Gross Income", "Characters", "Directors")),
+                                selectizeInput('columns','Select The Movie',"")),
+                              
+                              mainPanel(
+                                
+                                tableOutput("view")
+                                
+                              )
+                            )
+                            
+                   ),
+                   tabPanel("WORDCLOUD",
+                            sidebarPanel(
+                              selectInput("income1","Select Income for wordcloud",choices = c("Total Gross Income","Inflated Gross Income"))),
+                            mainPanel(
+                              plotOutput("cloud",width = "100%")
+                            )
+                            
+                   ),
+                   tabPanel("GENRE",
+                            sidebarPanel(
+                              selectInput("income","Select Income for genre",choices = c("Total Gross Income","Inflated Gross Income"))),
+                            
+                            mainPanel(
+                              plotOutput("genre")
+                            )
+                            
+                   )
+                   
+                   
+)
 
